@@ -63,5 +63,21 @@ namespace _2048_Core
             }
             return clone;
         }
+
+        /// <summary>
+        /// проверка, есть ли на игровом поле пустая ячейка
+        /// </summary>
+        /// <returns>наличие пустой ячейки</returns>
+        public bool HasEmptyCell()
+        {
+            for (int i = 0; i < _width; i++)
+            {
+                for (int j = 0; j < _height; j++)
+                {
+                    if (_field[i, j] == 0) return true;
+                }
+            }
+            return false;
+        }
     }
 }
