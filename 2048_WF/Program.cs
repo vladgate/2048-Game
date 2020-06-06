@@ -18,8 +18,9 @@ namespace _2048_WF
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Presenter presenter = new Presenter(GameManager.Instance);
-            Application.Run(new MainForm());
+            MainForm mainForm = new MainForm();
+            Presenter presenter = new Presenter(mainForm, new MessageService());
+            Application.Run(mainForm);
         }
     }
 }

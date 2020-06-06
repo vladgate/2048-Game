@@ -17,6 +17,8 @@ namespace _2048_Core
 
         public byte Height => _height;
 
+        public uint[,] Field { get => _field; private set => _field = value; }
+
         /// <summary>
         /// Создает новое игровое поле заданных размеров
         /// </summary>
@@ -41,7 +43,7 @@ namespace _2048_Core
             {
                 return _field[i, j];
             }
-            private set
+            set
             {
                 _field[i, j] = value;
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2048_Core.Presenter;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,32 @@ namespace _2048_Core.Abstract
 {
     public interface IMainView
     {
+        uint CurrentScore { set; }
+        uint HighScore { set; }
+
+        event EventHandler ResetHighscore;
+        event EventHandler AboutClick;
+        event EventHandler RestartClick;
+        event EventHandler<GameParametersEventArgs> NewGameClick;
+
         /// <summary>
-        /// отрисовать игровое поле под хаданное количество ячеек
+        /// откат на один ход назад
+        /// </summary>
+        event EventHandler BackClick;
+        event EventHandler<ExitGameEventArgs> ExitClick;
+        event EventHandler<MousePositionEventArgs> MouseDownView;
+        event EventHandler<MousePositionEventArgs> MouseUpView;
+
+        /// <summary>
+        /// отрисовать пустое игровое поле под заданное количество ячеек
         /// </summary>
         /// <param name="width">количество ячеек по ширине</param>
         /// <param name="height">количество ячеек по высоте</param>
         void DrawGameField(int width, int height);
+        /// <summary>
+        /// закрыть представление
+        /// </summary>
+        void Close();
 
         /// <summary>
         /// установить значение '0' по указанному индексу
