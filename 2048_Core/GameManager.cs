@@ -26,6 +26,8 @@ namespace _2048_Core
         private uint _previousScore;
         private uint _highScore;
 
+        internal event EventHandler WinGame;
+        internal event EventHandler LooseGame;
         internal string GameString()
         {
             StringBuilder sb = new StringBuilder();
@@ -56,10 +58,23 @@ namespace _2048_Core
             }
         }
 
-        public int GameFieldWidth { get => _currentGamefield.Width; }
-        public int GameFieldHeight { get => _currentGamefield.Height; }
+        public byte GameFieldWidth { get => _currentGamefield.Width; }
+
+        public byte GameFieldHeight { get => _currentGamefield.Height; }
+
         public uint[,] Field { get => _currentGamefield.Field; }
 
+        /// <summary>
+        /// сброс рекорда
+        /// </summary>
+        internal void ResetHighScore()
+        {
+            _highScore = 0;
+        }
+
+        /// <summary>
+        /// шаг назад
+        /// </summary>
         internal void StepBack()
         {
             if (_currentGamefield == _previousGamefield) //некуда откатываться
@@ -71,9 +86,10 @@ namespace _2048_Core
         }
 
         public uint CurrentScore { get => _currentScore; }
-        public uint PreviousScore { get => _previousScore; }
-        public uint HighScore { get => _highScore; set => _highScore = value; }
 
+        public uint PreviousScore { get => _previousScore; }
+
+        public uint HighScore { get => _highScore; }
 
         /// <summary>
         /// сохранить текущую игру
@@ -84,6 +100,7 @@ namespace _2048_Core
             GameData gameData = new GameData(_currentScore, _previousScore, _highScore, _currentGamefield, _previousGamefield);
             SaveGame(gameData);
         }
+
         private void SaveGame(GameData gameData)
         {
             if (gameData == null)
@@ -107,6 +124,377 @@ namespace _2048_Core
             }
             Properties.Settings.Default.Game = data;
             Properties.Settings.Default.Save();
+        }
+
+        internal void MoveDown()
+        {
+            bool canPlaceNewValue = false;
+            Gamefield tempArr = _currentGamefield.Clone();
+
+            for (int j = 0; j < _currentGamefield.Width; j++)
+            {
+                int maxEmptyRow = _currentGamefield.Height - 1;
+                for (int i = _currentGamefield.Width - 1; i >= 0; i--)
+                {
+                    if (tempArr[i, j] == 0)
+                    {
+                        if (maxEmptyRow < i) maxEmptyRow = i;
+                        continue;
+                    }
+                    else
+                    {
+                        if (maxEmptyRow < i) maxEmptyRow = i;
+                        uint neededValue = tempArr[i, j];
+                        if (i == 0 || i < maxEmptyRow)
+                        {
+                            tempArr[maxEmptyRow, j] = tempArr[i, j];
+                            if (i != maxEmptyRow)
+                            {
+                                tempArr[i, j] = 0;
+                                canPlaceNewValue = true;
+                                i = maxEmptyRow + 1;
+                                continue;
+                            }
+                            if (i == 0) break;
+                        }
+                        int initI = i;
+                        for (int k = i - 1; k >= 0; k--)
+                        {
+                            if (tempArr[k, j] == neededValue)
+                            {
+                                tempArr[maxEmptyRow, j] = neededValue * 2;
+                                _previousScore = _currentScore;
+                                _currentScore += neededValue * 2;
+                                if (i != maxEmptyRow) tempArr[i, j] = 0;
+                                tempArr[k, j] = 0;
+                                i = k;
+                                canPlaceNewValue = true;
+                                maxEmptyRow--;
+                                break;
+                            }
+                            else if (tempArr[k, j] > 0)
+                            {
+                                tempArr[maxEmptyRow - 1, j] = tempArr[k, j];
+                                i = maxEmptyRow;
+                                if (maxEmptyRow - 1 != k)
+                                {
+                                    tempArr[k, j] = 0;
+                                    canPlaceNewValue = true;
+                                }
+                                maxEmptyRow -= 2;
+                                break;
+                            }
+                            else
+                            {
+                                if (k == 0)
+                                {
+                                    tempArr[maxEmptyRow, j] = tempArr[i, j];
+                                    if (i != maxEmptyRow) tempArr[i, j] = 0;
+                                    if (initI != maxEmptyRow && (maxEmptyRow - i) > 0) canPlaceNewValue = true;
+                                    i = k;
+                                }
+                                else if (tempArr[maxEmptyRow, j] == 0 && tempArr[k, j] > 0)
+                                {
+                                    tempArr[maxEmptyRow, j] = tempArr[i, j];
+                                    i++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (_highScore > MAX_SCORE)
+            {
+                WinGame?.Invoke(this, EventArgs.Empty);
+            }
+            if (_highScore < _currentScore)
+            {
+                _highScore = _currentScore;
+            }
+            if (canPlaceNewValue)
+            {
+                _previousGamefield = _currentGamefield;
+                _currentGamefield = tempArr;
+                PlaceNewValue();
+            }
+        }
+
+        internal void MoveUp()
+        {
+            bool canPlaceNewValue = false;
+            Gamefield tempArr = _currentGamefield.Clone();
+
+            for (int j = 0; j < _currentGamefield.Height; j++)
+            {
+                int maxEmptyRow = 0;
+                for (int i = 0; i <= _currentGamefield.Width - 1; i++)
+                {
+                    if (tempArr[i, j] == 0)
+                    {
+                        if (maxEmptyRow > i) maxEmptyRow = i;
+                        continue;
+                    }
+                    else
+                    {
+                        if (maxEmptyRow > i) maxEmptyRow = i;
+                        uint neededValue = tempArr[i, j];
+                        if (i == _currentGamefield.Width - 1 || i > maxEmptyRow)
+                        {
+                            tempArr[maxEmptyRow, j] = tempArr[i, j];
+                            if (i != maxEmptyRow)
+                            {
+                                tempArr[i, j] = 0;
+                                canPlaceNewValue = true;
+                                i = maxEmptyRow - 1; continue;
+                            }
+                            if (i == _currentGamefield.Width - 1) break;
+                        }
+                        int initI = i;
+                        for (int k = i + 1; k <= _currentGamefield.Width - 1; k++)
+                        {
+                            if (tempArr[k, j] == neededValue)
+                            {
+                                tempArr[maxEmptyRow, j] = neededValue * 2;
+                                _previousScore = _currentScore;
+                                _currentScore += neededValue * 2;
+                                if (i != maxEmptyRow) tempArr[i, j] = 0;
+                                tempArr[k, j] = 0;
+                                i = k;
+                                canPlaceNewValue = true;
+                                maxEmptyRow++;
+                                break;
+                            }
+                            else if (tempArr[k, j] > 0)
+                            {
+                                tempArr[maxEmptyRow + 1, j] = tempArr[k, j];
+                                i = maxEmptyRow;
+                                if (maxEmptyRow + 1 != k)
+                                {
+                                    tempArr[k, j] = 0;
+                                    canPlaceNewValue = true;
+                                }
+                                maxEmptyRow += 2;
+                                break;
+                            }
+                            else
+                            {
+                                if (k == _currentGamefield.Width - 1)
+                                {
+                                    tempArr[maxEmptyRow, j] = tempArr[i, j];
+                                    if (i != maxEmptyRow) tempArr[i, j] = 0;
+                                    if (initI != maxEmptyRow && (i - maxEmptyRow) > 0) canPlaceNewValue = true;
+                                    i = k;
+                                }
+                                else if (tempArr[maxEmptyRow, j] == 0 && tempArr[k, j] > 0)
+                                {
+                                    tempArr[maxEmptyRow, j] = tempArr[i, j];
+                                    i--;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (_highScore > MAX_SCORE)
+            {
+                WinGame?.Invoke(this, EventArgs.Empty);
+            }
+            if (_highScore < _currentScore)
+            {
+                _highScore = _currentScore;
+            }
+            if (canPlaceNewValue)
+            {
+                _previousGamefield = _currentGamefield;
+                _currentGamefield = tempArr;
+                PlaceNewValue();
+            }
+        }
+
+        internal void MoveRight()
+        {
+            bool canPlaceNewValue = false;
+            Gamefield tempArr = _currentGamefield.Clone();
+
+            for (int i = 0; i < _currentGamefield.Width; i++)
+            {
+                int maxEmptyColumn = _currentGamefield.Width - 1;
+                for (int j = _currentGamefield.Height - 1; j >= 0; j--)
+                {
+                    if (tempArr[i, j] == 0)
+                    {
+                        if (maxEmptyColumn < j) maxEmptyColumn = j;
+                        continue;
+                    }
+                    else
+                    {
+                        if (maxEmptyColumn < j) maxEmptyColumn = j;
+                        uint neededValue = tempArr[i, j];
+                        if (j == 0 || j < maxEmptyColumn)
+                        {
+                            tempArr[i, maxEmptyColumn] = tempArr[i, j];
+                            if (j != maxEmptyColumn)
+                            {
+                                tempArr[i, j] = 0;
+                                canPlaceNewValue = true;
+                                j = maxEmptyColumn + 1; continue;
+                            }
+                            if (j == 0) break;
+                        }
+                        int initJ = j;
+                        for (int k = j - 1; k >= 0; k--)
+                        {
+                            if (tempArr[i, k] == neededValue)
+                            {
+                                tempArr[i, maxEmptyColumn] = neededValue * 2;
+                                _previousScore = _currentScore;
+                                _currentScore += neededValue * 2;
+                                if (j != maxEmptyColumn) tempArr[i, j] = 0;
+                                tempArr[i, k] = 0;
+                                j = k;
+                                canPlaceNewValue = true;
+                                maxEmptyColumn--;
+                                break;
+                            }
+                            else if (tempArr[i, k] > 0)
+                            {
+                                tempArr[i, maxEmptyColumn - 1] = tempArr[i, k];
+                                j = maxEmptyColumn;
+
+                                if (maxEmptyColumn - 1 != k)
+                                {
+                                    tempArr[i, k] = 0;
+                                    canPlaceNewValue = true;
+                                }
+                                maxEmptyColumn -= 2;
+                                break;
+                            }
+                            else
+                            {
+                                if (k == 0)
+                                {
+                                    tempArr[i, maxEmptyColumn] = tempArr[i, j];
+                                    if (j != maxEmptyColumn) tempArr[i, j] = 0;
+                                    if (initJ != maxEmptyColumn && (maxEmptyColumn - j) > 0) canPlaceNewValue = true;
+                                    j = k;
+                                }
+                                else if (tempArr[i, maxEmptyColumn] == 0 && tempArr[i, k] > 0)
+                                {
+                                    tempArr[i, maxEmptyColumn] = tempArr[i, j];
+                                    j++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (_highScore > MAX_SCORE)
+            {
+                WinGame?.Invoke(this, EventArgs.Empty);
+            }
+            if (_highScore < _currentScore)
+            {
+                _highScore = _currentScore;
+            }
+            if (canPlaceNewValue)
+            {
+                _previousGamefield = _currentGamefield;
+                _currentGamefield = tempArr;
+                PlaceNewValue();
+            }
+        }
+
+        internal void MoveLeft()
+        {
+            bool canPlaceNewValue = false;
+            Gamefield tempArr = _currentGamefield.Clone();
+
+            for (int i = 0; i < _currentGamefield.Width; i++)
+            {
+                int maxEmptyColumn = 0;
+                for (int j = 0; j <= _currentGamefield.Height - 1; j++)
+                {
+                    if (tempArr[i, j] == 0)
+                    {
+                        if (maxEmptyColumn > j) maxEmptyColumn = j;
+                        continue;
+                    }
+                    else
+                    {
+                        if (maxEmptyColumn > j) maxEmptyColumn = j;
+                        uint neededValue = tempArr[i, j];
+                        if (j == _currentGamefield.Height - 1 || j > maxEmptyColumn)
+                        {
+                            tempArr[i, maxEmptyColumn] = tempArr[i, j];
+                            if (j != maxEmptyColumn)
+                            {
+                                tempArr[i, j] = 0;
+                                canPlaceNewValue = true;
+                                j = maxEmptyColumn - 1; continue;
+                            }
+                            if (j == _currentGamefield.Height - 1) break;
+                        }
+                        int initJ = j;
+                        for (int k = j + 1; k <= _currentGamefield.Height - 1; k++)
+                        {
+                            if (tempArr[i, k] == neededValue)
+                            {
+                                tempArr[i, maxEmptyColumn] = neededValue * 2;
+                                _previousScore = _currentScore;
+                                _currentScore += neededValue * 2;
+                                if (j != maxEmptyColumn) tempArr[i, j] = 0;
+                                tempArr[i, k] = 0;
+                                j = k;
+                                canPlaceNewValue = true;
+                                maxEmptyColumn++;
+                                break;
+                            }
+                            else if (tempArr[i, k] > 0)
+                            {
+                                tempArr[i, maxEmptyColumn + 1] = tempArr[i, k];
+                                j = maxEmptyColumn;
+
+                                if (maxEmptyColumn + 1 != k)
+                                {
+                                    tempArr[i, k] = 0;
+                                    canPlaceNewValue = true;
+                                }
+                                maxEmptyColumn += 2;
+                                break;
+                            }
+                            else
+                            {
+                                if (k == _currentGamefield.Height - 1)
+                                {
+                                    tempArr[i, maxEmptyColumn] = tempArr[i, j];
+                                    if (j != maxEmptyColumn) tempArr[i, j] = 0;
+                                    if (initJ != maxEmptyColumn && (j - maxEmptyColumn) > 0) canPlaceNewValue = true;
+                                    j = k;
+                                }
+                                else if (tempArr[i, maxEmptyColumn] == 0 && tempArr[i, k] > 0)
+                                {
+                                    tempArr[i, maxEmptyColumn] = tempArr[i, j];
+                                    j--;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (_highScore > MAX_SCORE)
+            {
+                WinGame?.Invoke(this, EventArgs.Empty);
+            }
+            if (_highScore < _currentScore)
+            {
+                _highScore = _currentScore;
+            }
+            if (canPlaceNewValue)
+            {
+                _previousGamefield = _currentGamefield;
+                _currentGamefield = tempArr;
+                PlaceNewValue();
+            }
         }
 
         /// <summary>
@@ -160,10 +548,46 @@ namespace _2048_Core
                 while (_currentGamefield[newX, newY] != 0);
                 _currentGamefield[newX, newY] = (uint)(rnd.Next(0, 100) > 10 ? 2 : 4);
             }
-            else  //все ячейки заполнены - проигрыш
+            if (!GamefieldHasMove())
             {
-                throw new NoEmptyCellException();
+                /*throw new NoEmptyCellException()*/
+                ;//все ячейки заполнены - проигрыш
+                LooseGame?.Invoke(this, EventArgs.Empty);
             }
+        }
+        /// <summary>
+        /// есть ли доступный ход
+        /// </summary>
+        /// <returns>true если есть доступный ход</returns>
+        private bool GamefieldHasMove()
+        {
+            if (_currentGamefield.HasEmptyCell()) // если есть пустая ячейка - ход есть
+            {
+                return true;
+            };
+            //если есть рядом две одинаковые ячейки - ход есть
+            for (int i = 0; i < _currentGamefield.Width - 1; i++)
+            {
+                for (int j = 0; j < _currentGamefield.Height; j++)
+                {
+                    if (_currentGamefield[i, j] == _currentGamefield[i + 1, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            for (int i = 0; i < _currentGamefield.Width; i++)
+            {
+                for (int j = 0; j < _currentGamefield.Height - 1; j++)
+                {
+                    if (_currentGamefield[i, j] == _currentGamefield[i, j + 1])
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -207,7 +631,6 @@ namespace _2048_Core
             PlaceNewValue();
         }
 
-
         /// <summary>
         /// продолжаем игру
         /// </summary>
@@ -224,7 +647,6 @@ namespace _2048_Core
             _highScore = gameData.HighScore;
         }
     }
-
 
     /// <summary>
     /// инкапсулирует данные для сохранения/загрузки

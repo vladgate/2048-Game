@@ -42,13 +42,12 @@ namespace _2048_WF
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.classic4x4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.continueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.big5x5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetHighscoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnRestart = new System.Windows.Forms.Button();
-            this.big5x5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.mainMenuStrip.SuspendLayout();
@@ -146,7 +145,6 @@ namespace _2048_WF
             // 
             this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newGameToolStripMenuItem,
-            this.continueToolStripMenuItem,
             this.resetHighscoreToolStripMenuItem,
             this.exitToolStripMenuItem,
             this.aboutToolStripMenuItem});
@@ -170,11 +168,12 @@ namespace _2048_WF
             this.classic4x4ToolStripMenuItem.Text = "Classic(4x4)";
             this.classic4x4ToolStripMenuItem.Click += new System.EventHandler(this.classic4x4ToolStripMenuItem_Click);
             // 
-            // continueToolStripMenuItem
+            // big5x5ToolStripMenuItem
             // 
-            this.continueToolStripMenuItem.Name = "continueToolStripMenuItem";
-            this.continueToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.continueToolStripMenuItem.Text = "Continue";
+            this.big5x5ToolStripMenuItem.Name = "big5x5ToolStripMenuItem";
+            this.big5x5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.big5x5ToolStripMenuItem.Text = "Big(5x5)";
+            this.big5x5ToolStripMenuItem.Click += new System.EventHandler(this.big5x5ToolStripMenuItem_Click);
             // 
             // resetHighscoreToolStripMenuItem
             // 
@@ -227,13 +226,6 @@ namespace _2048_WF
             this.btnRestart.UseVisualStyleBackColor = false;
             this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
             // 
-            // big5x5ToolStripMenuItem
-            // 
-            this.big5x5ToolStripMenuItem.Name = "big5x5ToolStripMenuItem";
-            this.big5x5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.big5x5ToolStripMenuItem.Text = "Big(5x5)";
-            this.big5x5ToolStripMenuItem.Click += new System.EventHandler(this.big5x5ToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -279,7 +271,6 @@ namespace _2048_WF
         private System.Windows.Forms.MenuStrip mainMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem continueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem classic4x4ToolStripMenuItem;
         private System.Windows.Forms.Button btnBack;

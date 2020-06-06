@@ -9,12 +9,11 @@ namespace _2048_WF
     public partial class MainForm : Form, IMainView
     {
         private Label[,] _labels;
-        private Font _imageFontLarge/*, myFont2, myFont3*/;
+        private Font _imageFontLarge;
         private Font _imageFontMedium;
         private const int LABEL_SIZE = 50;
         private const int WIDTH_CORRECTION = 40;
         private const int HEIGHT_CORRECTION = 140;
-
 
         public MainForm()
         {
@@ -100,8 +99,6 @@ namespace _2048_WF
         public void DrawGameField(int width, int height)
         {
             _mainPanel.Controls.Clear();
-            //_mainPanel.Width = LABEL_SIZE * width;
-            //_mainPanel.Height = LABEL_SIZE * height;
             _labels = new Label[width, height];
 
             byte shift = 2;

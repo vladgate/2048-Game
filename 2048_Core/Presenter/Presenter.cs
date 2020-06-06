@@ -10,11 +10,15 @@ namespace _2048_Core.Presenter
     public sealed class Presenter
     {
         private GameManager _gameManager;
-        IMainView _mainView;
+        private IMainView _mainView;
         private IMessageService _messageService;
+        private int downX, downY;
         public Presenter(IMainView mainView, IMessageService messageService)
         {
             _gameManager = GameManager.Instance;
+            _gameManager.WinGame += WinGameDetected;
+            _gameManager.LooseGame += LooseGameDetected;
+
             _mainView = mainView;
             _messageService = messageService;
             _mainView.ResetHighscore += MainView_ResetHighscore;
@@ -30,17 +34,49 @@ namespace _2048_Core.Presenter
             InitView();
         }
 
+        private void LooseGameDetected(object sender, EventArgs e)
+        {
+            DrawCellsOnView(_gameManager.Field);
+            _mainView.CurrentScore = _gameManager.CurrentScore;
+            _mainView.HighScore = _gameManager.HighScore;
+
+            bool restart = _messageService.WantNewGame("You loose! Start new game?", "2048");
+            if (restart)
+            {
+                _gameManager.StartNewGame(_gameManager.GameFieldWidth, _gameManager.GameFieldHeight);
+                InitView();
+            }
+        }
+
+        private void WinGameDetected(object sender, EventArgs e)
+        {
+            DrawCellsOnView(_gameManager.Field);
+            _mainView.CurrentScore = _gameManager.CurrentScore;
+            _mainView.HighScore = _gameManager.HighScore;
+
+            bool restart = _messageService.WantNewGame("You win! Start new game?", "2048");
+            if (restart)
+            {
+                _gameManager.StartNewGame(_gameManager.GameFieldWidth, _gameManager.GameFieldHeight);
+                InitView();
+            }
+        }
+
         private void MainView_RestartClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            bool restart = _messageService.WantNewGame("Restart?", "2048");
+            if (restart)
+            {
+                _gameManager.StartNewGame(_gameManager.GameFieldWidth, _gameManager.GameFieldHeight);
+                InitView();
+            }
         }
 
         private void MainView_ResetHighscore(object sender, EventArgs e)
         {
-            _gameManager.HighScore = 0;
+            _gameManager.ResetHighScore();
             _mainView.HighScore = 0;
         }
-
 
         private void MainView_NewGameClick(object sender, GameParametersEventArgs e)
         {
@@ -50,8 +86,8 @@ namespace _2048_Core.Presenter
 
         private void MainView_BackClick(object sender, EventArgs e)
         {
-            int prevWidth = _gameManager.GameFieldWidth;
-            int prevHeight = _gameManager.GameFieldHeight;
+            byte prevWidth = _gameManager.GameFieldWidth;
+            byte prevHeight = _gameManager.GameFieldHeight;
             _gameManager.StepBack();
             if (prevWidth != _gameManager.GameFieldWidth || prevHeight != _gameManager.GameFieldHeight)
             {
@@ -65,7 +101,7 @@ namespace _2048_Core.Presenter
 
         private void MainView_AboutClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            _messageService.ShowMessage("Game 2048. v.1.1.0. \nDeveloped by Vladyslav Galapats", "About");
         }
 
         private void MainView_ExitClick(object sender, ExitGameEventArgs e)
@@ -78,12 +114,44 @@ namespace _2048_Core.Presenter
         }
         private void MainView_MouseUpView(object sender, MousePositionEventArgs e)
         {
-            throw new NotImplementedException();
+            int deltaX = downX - e.X;
+            int deltaY = downY - e.Y;
+            if (deltaX == 0 && deltaY == 0)
+            {
+                return;
+            }
+                if (Math.Abs(deltaX) >= Math.Abs(deltaY))
+                {
+                    if (deltaX > 0)
+                    {
+                        _gameManager.MoveLeft();
+                    }
+                    else
+                    {
+                        _gameManager.MoveRight();
+                    }
+                }
+                else
+                {
+                    if (deltaY > 0)
+                    {
+                        _gameManager.MoveUp();
+                    }
+                    else
+                    {
+                        _gameManager.MoveDown();
+                    }
+                }
+            
+            DrawCellsOnView(_gameManager.Field);
+            _mainView.CurrentScore = _gameManager.CurrentScore;
+            _mainView.HighScore = _gameManager.HighScore;
         }
 
         private void MainView_MouseDownView(object sender, MousePositionEventArgs e)
         {
-            throw new NotImplementedException();
+            downX = e.X;
+            downY = e.Y;
         }
 
         private void InitView()
