@@ -43,12 +43,12 @@ namespace _2048_WF
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.classic4x4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.big5x5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tiny3x3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetHighscoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnRestart = new System.Windows.Forms.Button();
-            this.tiny3x3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.mainMenuStrip.SuspendLayout();
@@ -162,9 +162,9 @@ namespace _2048_WF
             // newGameToolStripMenuItem
             // 
             this.newGameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tiny3x3ToolStripMenuItem,
             this.classic4x4ToolStripMenuItem,
-            this.big5x5ToolStripMenuItem,
-            this.tiny3x3ToolStripMenuItem});
+            this.big5x5ToolStripMenuItem});
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
             this.newGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newGameToolStripMenuItem.Text = "New game";
@@ -182,6 +182,13 @@ namespace _2048_WF
             this.big5x5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.big5x5ToolStripMenuItem.Text = "Big(5x5)";
             this.big5x5ToolStripMenuItem.Click += new System.EventHandler(this.big5x5ToolStripMenuItem_Click);
+            // 
+            // tiny3x3ToolStripMenuItem
+            // 
+            this.tiny3x3ToolStripMenuItem.Name = "tiny3x3ToolStripMenuItem";
+            this.tiny3x3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tiny3x3ToolStripMenuItem.Text = "Tiny(3x3)";
+            this.tiny3x3ToolStripMenuItem.Click += new System.EventHandler(this.tiny3x3ToolStripMenuItem_Click);
             // 
             // resetHighscoreToolStripMenuItem
             // 
@@ -235,13 +242,6 @@ namespace _2048_WF
             this.btnRestart.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnRestart.UseVisualStyleBackColor = false;
             this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
-            // 
-            // tiny3x3ToolStripMenuItem
-            // 
-            this.tiny3x3ToolStripMenuItem.Name = "tiny3x3ToolStripMenuItem";
-            this.tiny3x3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.tiny3x3ToolStripMenuItem.Text = "Tiny(3x3)";
-            this.tiny3x3ToolStripMenuItem.Click += new System.EventHandler(this.tiny3x3ToolStripMenuItem_Click);
             // 
             // MainForm
             // 
