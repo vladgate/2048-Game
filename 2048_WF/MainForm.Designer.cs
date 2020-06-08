@@ -48,6 +48,7 @@ namespace _2048_WF
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnRestart = new System.Windows.Forms.Button();
+            this.tiny3x3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.mainMenuStrip.SuspendLayout();
@@ -57,75 +58,81 @@ namespace _2048_WF
             // 
             this._mainPanel.BackColor = System.Drawing.SystemColors.ControlDark;
             this._mainPanel.Cursor = System.Windows.Forms.Cursors.Default;
-            this._mainPanel.Location = new System.Drawing.Point(12, 68);
+            this._mainPanel.Location = new System.Drawing.Point(12, 34);
             this._mainPanel.Name = "_mainPanel";
-            this._mainPanel.Size = new System.Drawing.Size(240, 240);
+            this._mainPanel.Size = new System.Drawing.Size(170, 170);
             this._mainPanel.TabIndex = 2;
             this._mainPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mainPanel_MouseDown);
             this._mainPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mainPanel_MouseUp);
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pictureBox1.Location = new System.Drawing.Point(70, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 208);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(88, 32);
+            this.pictureBox1.Size = new System.Drawing.Size(84, 32);
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label1.Location = new System.Drawing.Point(90, 5);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label1.Location = new System.Drawing.Point(26, 209);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.Size = new System.Drawing.Size(48, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "SCORE";
             // 
             // lblScore
             // 
+            this.lblScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblScore.BackColor = System.Drawing.SystemColors.ControlDark;
             this.lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblScore.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblScore.Location = new System.Drawing.Point(70, 18);
+            this.lblScore.Location = new System.Drawing.Point(12, 222);
             this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(88, 18);
+            this.lblScore.Size = new System.Drawing.Size(84, 18);
             this.lblScore.TabIndex = 5;
             this.lblScore.Text = "0";
             this.lblScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox2
             // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pictureBox2.Location = new System.Drawing.Point(164, 4);
+            this.pictureBox2.Location = new System.Drawing.Point(98, 208);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(88, 32);
+            this.pictureBox2.Size = new System.Drawing.Size(84, 32);
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label2.Location = new System.Drawing.Point(165, 5);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label2.Location = new System.Drawing.Point(99, 209);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 13);
+            this.label2.Size = new System.Drawing.Size(81, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "HIGH SCORE";
             // 
             // lblHighScore
             // 
+            this.lblHighScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblHighScore.BackColor = System.Drawing.SystemColors.ControlDark;
             this.lblHighScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblHighScore.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblHighScore.Location = new System.Drawing.Point(164, 18);
+            this.lblHighScore.Location = new System.Drawing.Point(98, 222);
             this.lblHighScore.Name = "lblHighScore";
-            this.lblHighScore.Size = new System.Drawing.Size(86, 18);
+            this.lblHighScore.Size = new System.Drawing.Size(84, 18);
             this.lblHighScore.TabIndex = 5;
             this.lblHighScore.Text = "0";
             this.lblHighScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -137,7 +144,7 @@ namespace _2048_WF
             this.gameToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
-            this.mainMenuStrip.Size = new System.Drawing.Size(264, 24);
+            this.mainMenuStrip.Size = new System.Drawing.Size(193, 24);
             this.mainMenuStrip.TabIndex = 6;
             this.mainMenuStrip.Text = "menuStrip1";
             // 
@@ -156,7 +163,8 @@ namespace _2048_WF
             // 
             this.newGameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.classic4x4ToolStripMenuItem,
-            this.big5x5ToolStripMenuItem});
+            this.big5x5ToolStripMenuItem,
+            this.tiny3x3ToolStripMenuItem});
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
             this.newGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newGameToolStripMenuItem.Text = "New game";
@@ -198,10 +206,11 @@ namespace _2048_WF
             // 
             // btnBack
             // 
+            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBack.BackColor = System.Drawing.SystemColors.ControlDark;
             this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnBack.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.btnBack.Location = new System.Drawing.Point(162, 42);
+            this.btnBack.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnBack.Location = new System.Drawing.Point(93, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(38, 20);
             this.btnBack.TabIndex = 7;
@@ -213,10 +222,11 @@ namespace _2048_WF
             // 
             // btnRestart
             // 
+            this.btnRestart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRestart.BackColor = System.Drawing.SystemColors.ControlDark;
             this.btnRestart.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnRestart.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.btnRestart.Location = new System.Drawing.Point(199, 42);
+            this.btnRestart.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnRestart.Location = new System.Drawing.Point(130, 12);
             this.btnRestart.Name = "btnRestart";
             this.btnRestart.Size = new System.Drawing.Size(54, 20);
             this.btnRestart.TabIndex = 7;
@@ -226,12 +236,19 @@ namespace _2048_WF
             this.btnRestart.UseVisualStyleBackColor = false;
             this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
             // 
+            // tiny3x3ToolStripMenuItem
+            // 
+            this.tiny3x3ToolStripMenuItem.Name = "tiny3x3ToolStripMenuItem";
+            this.tiny3x3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tiny3x3ToolStripMenuItem.Text = "Tiny(3x3)";
+            this.tiny3x3ToolStripMenuItem.Click += new System.EventHandler(this.tiny3x3ToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Ivory;
-            this.ClientSize = new System.Drawing.Size(264, 344);
+            this.ClientSize = new System.Drawing.Size(193, 245);
             this.Controls.Add(this.btnRestart);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.lblHighScore);
@@ -278,6 +295,7 @@ namespace _2048_WF
         private System.Windows.Forms.ToolStripMenuItem resetHighscoreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem big5x5ToolStripMenuItem;
+        private ToolStripMenuItem tiny3x3ToolStripMenuItem;
     }
 }
 

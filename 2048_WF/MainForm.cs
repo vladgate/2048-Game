@@ -13,7 +13,7 @@ namespace _2048_WF
         private Font _imageFontMedium;
         private const int LABEL_SIZE = 50;
         private const int WIDTH_CORRECTION = 40;
-        private const int HEIGHT_CORRECTION = 140;
+        private const int HEIGHT_CORRECTION = 115;
 
         public MainForm()
         {
@@ -43,6 +43,11 @@ namespace _2048_WF
         {
             AboutClick?.Invoke(sender, e);
         }
+        private void tiny3x3ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewGameClick?.Invoke(sender, new GameParametersEventArgs(3, 3));
+        }
+
         private void classic4x4ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NewGameClick?.Invoke(sender, new GameParametersEventArgs(4, 4));
@@ -101,14 +106,13 @@ namespace _2048_WF
             _mainPanel.Controls.Clear();
             _labels = new Label[width, height];
 
-            byte shift = 2;
-            switch (width)
-            {
-                case 3: shift = 12; break;
-                case 4: shift = 8; break;
-                case 5: shift = 5; break;
-            }
-            //int labeSize = (_mainPanel.Width - shift) / width - shift;
+            byte shift = 5;
+            //switch (width)
+            //{
+            //    case 3: shift = 12; break;
+            //    case 4: shift = 8; break;
+            //    case 5: shift = 5; break;
+            //}
             _mainPanel.Width = LABEL_SIZE * width + shift * (width + 1);
             _mainPanel.Height = LABEL_SIZE * height + shift * (height + 1);
             Width = _mainPanel.Width + WIDTH_CORRECTION;
