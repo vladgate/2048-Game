@@ -9,7 +9,7 @@ namespace _2048_WF
     public partial class MainForm : Form, IMainView
     {
         private Label[,] _labels;
-        private Font _imageFontLarge;
+        private Font _imageFontSizeLarge;
         private Font _imageFontMedium;
         private const int LABEL_SIZE = 50;
         private const int WIDTH_CORRECTION = 40;
@@ -18,7 +18,7 @@ namespace _2048_WF
         public MainForm()
         {
             InitializeComponent();
-            _imageFontLarge = new Font("Times New Roman", 16f, FontStyle.Bold);
+            _imageFontSizeLarge = new Font("Times New Roman", 16f, FontStyle.Bold);
             _imageFontMedium = new Font("Times New Roman", 14f, FontStyle.Bold);
         }
 
@@ -107,12 +107,6 @@ namespace _2048_WF
             _labels = new Label[width, height];
 
             byte shift = 5;
-            //switch (width)
-            //{
-            //    case 3: shift = 12; break;
-            //    case 4: shift = 8; break;
-            //    case 5: shift = 5; break;
-            //}
             _mainPanel.Width = LABEL_SIZE * width + shift * (width + 1);
             _mainPanel.Height = LABEL_SIZE * height + shift * (height + 1);
             Width = _mainPanel.Width + WIDTH_CORRECTION;
@@ -126,7 +120,7 @@ namespace _2048_WF
                     lbl.Width = lbl.Height = LABEL_SIZE;
                     lbl.Location = new Point((j) * LABEL_SIZE + shift * (j + 1), (i) * LABEL_SIZE + shift * (i + 1));
                     lbl.BackColor = SystemColors.ScrollBar;
-                    lbl.Font = _imageFontLarge;
+                    lbl.Font = _imageFontSizeLarge;
                     lbl.TextAlign = ContentAlignment.MiddleCenter;
                     lbl.MouseDown += MouseDownHandler;
                     lbl.MouseUp += MouseUpHandler;
@@ -140,7 +134,7 @@ namespace _2048_WF
         {
             _labels[i, j].Text = "";
             _labels[i, j].BackColor = SystemColors.ScrollBar;
-            _labels[i, j].Font = _imageFontLarge;
+            _labels[i, j].Font = _imageFontSizeLarge;
         }
 
         public void Set2(int i, int j)
@@ -148,7 +142,7 @@ namespace _2048_WF
             _labels[i, j].Text = "2";
             _labels[i, j].BackColor = SystemColors.ControlLight;
             _labels[i, j].ForeColor = SystemColors.Desktop;
-            _labels[i, j].Font = _imageFontLarge;
+            _labels[i, j].Font = _imageFontSizeLarge;
         }
 
         public void Set4(int i, int j)
@@ -156,7 +150,7 @@ namespace _2048_WF
             _labels[i, j].Text = "4";
             _labels[i, j].BackColor = SystemColors.Info;
             _labels[i, j].ForeColor = SystemColors.Desktop;
-            _labels[i, j].Font = _imageFontLarge;
+            _labels[i, j].Font = _imageFontSizeLarge;
         }
 
         public void Set8(int i, int j)
@@ -164,7 +158,7 @@ namespace _2048_WF
             _labels[i, j].Text = "8";
             _labels[i, j].BackColor = Color.SandyBrown;
             _labels[i, j].ForeColor = SystemColors.ButtonHighlight;
-            _labels[i, j].Font = _imageFontLarge;
+            _labels[i, j].Font = _imageFontSizeLarge;
         }
 
         public void Set16(int i, int j)
@@ -172,7 +166,7 @@ namespace _2048_WF
             _labels[i, j].Text = "16";
             _labels[i, j].BackColor = Color.Chocolate;
             _labels[i, j].ForeColor = SystemColors.ButtonHighlight;
-            _labels[i, j].Font = _imageFontLarge;
+            _labels[i, j].Font = _imageFontSizeLarge;
         }
 
         public void Set32(int i, int j)
@@ -180,7 +174,7 @@ namespace _2048_WF
             _labels[i, j].Text = "32";
             _labels[i, j].BackColor = Color.Tomato;
             _labels[i, j].ForeColor = SystemColors.ButtonHighlight;
-            _labels[i, j].Font = _imageFontLarge;
+            _labels[i, j].Font = _imageFontSizeLarge;
         }
 
         public void Set64(int i, int j)
@@ -188,7 +182,7 @@ namespace _2048_WF
             _labels[i, j].Text = "64";
             _labels[i, j].BackColor = Color.Red;
             _labels[i, j].ForeColor = SystemColors.ButtonHighlight;
-            _labels[i, j].Font = _imageFontLarge;
+            _labels[i, j].Font = _imageFontSizeLarge;
         }
 
         public void Set128(int i, int j)
@@ -196,7 +190,7 @@ namespace _2048_WF
             _labels[i, j].Text = "128";
             _labels[i, j].BackColor = Color.Goldenrod;
             _labels[i, j].ForeColor = SystemColors.ButtonHighlight;
-            _labels[i, j].Font = _imageFontLarge;
+            _labels[i, j].Font = _imageFontSizeLarge;
         }
 
         public void Set256(int i, int j)
@@ -204,7 +198,7 @@ namespace _2048_WF
             _labels[i, j].Text = "256";
             _labels[i, j].BackColor = Color.Goldenrod;
             _labels[i, j].ForeColor = SystemColors.ButtonHighlight;
-            _labels[i, j].Font = _imageFontLarge;
+            _labels[i, j].Font = _imageFontSizeLarge;
         }
 
         public void Set512(int i, int j)
@@ -212,7 +206,7 @@ namespace _2048_WF
             _labels[i, j].Text = "512";
             _labels[i, j].BackColor = Color.Goldenrod;
             _labels[i, j].ForeColor = SystemColors.ButtonHighlight;
-            _labels[i, j].Font = _imageFontLarge;
+            _labels[i, j].Font = _imageFontSizeLarge;
         }
 
         public void Set1024(int i, int j)

@@ -8,9 +8,9 @@ namespace _2048_Core.Presenter
 {
     public sealed class MousePositionEventArgs : EventArgs
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public MousePositionEventArgs(int x, int y)
+        public double X { get; set; }
+        public double Y { get; set; }
+        public MousePositionEventArgs(double x, double y)
         {
             X = x;
             Y = y;

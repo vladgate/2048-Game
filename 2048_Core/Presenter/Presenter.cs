@@ -12,7 +12,7 @@ namespace _2048_Core.Presenter
         private GameManager _gameManager;
         private IMainView _mainView;
         private IMessageService _messageService;
-        private int downX, downY;
+        private double downX, downY;
         public Presenter(IMainView mainView, IMessageService messageService)
         {
             _gameManager = GameManager.Instance;
@@ -112,10 +112,11 @@ namespace _2048_Core.Presenter
                 _mainView.Close();
             }
         }
+
         private void MainView_MouseUpView(object sender, MousePositionEventArgs e)
         {
-            int deltaX = downX - e.X;
-            int deltaY = downY - e.Y;
+            double deltaX = downX - e.X;
+            double deltaY = downY - e.Y;
             if (deltaX == 0 && deltaY == 0)
             {
                 return;

@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="WpfMessageService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -100,6 +101,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\2048_Core\2048_Core.csproj">
+      <Project>{838844CF-335B-4432-B0FD-426277BF06D2}</Project>
+      <Name>2048_Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
