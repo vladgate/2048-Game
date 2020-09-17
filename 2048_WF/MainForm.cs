@@ -116,7 +116,6 @@ namespace _2048_WF
                 for (int j = 0; j < height; j++)
                 {
                     Label lbl = new Label();
-                    //lbl.Name = "label_" + i + "_" + j;
                     lbl.Width = lbl.Height = LABEL_SIZE;
                     lbl.Location = new Point((j) * LABEL_SIZE + shift * (j + 1), (i) * LABEL_SIZE + shift * (i + 1));
                     lbl.BackColor = SystemColors.ScrollBar;

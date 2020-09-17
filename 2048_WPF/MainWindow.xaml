@@ -5,77 +5,77 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_2048_WPF"
         mc:Ignorable="d"
-        Title="2048" Height="310" Width="222" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" Closing="Form_Closing">
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                <LinearGradientBrush.RelativeTransform>
-                    <TransformGroup>
-                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                        <RotateTransform CenterY="0.5" CenterX="0.5"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </LinearGradientBrush.RelativeTransform>
-                <GradientStop Color="CadetBlue"/>
-                <GradientStop Color="DarkOliveGreen" Offset="0.5"/>
-                <GradientStop Color="LavenderBlush" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <StackPanel HorizontalAlignment="Left" Margin="3" VerticalAlignment="Top">
-            <Canvas Background="#FFFF8D2F" Height="28" >
-                <Menu Background="#FFFF8D2F" Height="28" Width="72" FontWeight="Bold" FontSize="16">
-                    <MenuItem Header="Menu" >
-                        <MenuItem Header="New game" FontWeight="Medium" FontSize="14">
-                            <MenuItem Header="Tiny(3x3)" FontWeight="Medium" Click="TinyGame_Click"></MenuItem>
-                            <MenuItem Header="Classic(4x4)" FontWeight="Medium" Click="MediumGame_Click"></MenuItem>
-                            <MenuItem Header="Big(5x5)" FontWeight="Medium" Click="BigGame_Click"></MenuItem>
-                        </MenuItem>
-                        <MenuItem Header="Reset highscore" FontWeight="Medium" FontSize="14" Click="ResetHighScore_Click"></MenuItem>
-                        <MenuItem Header="About" FontWeight="Medium" FontSize="14" Click="About_Click"></MenuItem>
-                        <MenuItem Header="Exit" FontWeight="Medium" FontSize="14" Click="Exit_Click"></MenuItem>
-                    </MenuItem>
-                </Menu>
-                <Button Background="Orange" FontWeight="Bold" BorderThickness="1" Canvas.Left="70" Click="BtnBack_Click">
-                    <Image Source="back.png" Width="24" Height="24" ToolTip="Back">
-                    </Image>
-                </Button>
-                <Button Background="Orange" FontWeight="Bold" BorderThickness="1" Canvas.Left="100" Click="BtnRestart_Click">
-                    <Image Source="refresh.png" Width="24" Height="24" ToolTip="Restart"></Image>
-                </Button>
-            </Canvas>
-                <local:BorderGrid  Height="210" Width="210" x:Name="_mainGrid">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="70"/>
-                        <ColumnDefinition Width="70"/>
-                        <ColumnDefinition Width="70"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="70"/>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
-                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
-                    <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
-                    <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
-                    <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
-                    <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
-                    <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
-                    <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
-                    <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
-                </local:BorderGrid>
-            <StackPanel Background="#FFFF8D2F" Height="42">
-                <DockPanel HorizontalAlignment="Left" Margin="-3 -5 0 -3">
-                    <Label Content="Score:"/>
-                    <Label Name="lblScore" Content="0" MaxWidth="150"/>
-                </DockPanel>
-                <DockPanel HorizontalAlignment="Left" Margin="-3">
-                    <Label Content="Highscore:"/>
-                    <Label Name="lblHighScore" Content="0" MaxWidth="150"/>
-                </DockPanel>
-            </StackPanel>
-        </StackPanel>
+        Title="2048" Name="_mainWindow" Height="310" Width="222" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" Closing="Form_Closing">
+   <Grid>
+      <Grid.Background>
+         <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+            <LinearGradientBrush.RelativeTransform>
+               <TransformGroup>
+                  <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                  <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                  <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                  <TranslateTransform/>
+               </TransformGroup>
+            </LinearGradientBrush.RelativeTransform>
+            <GradientStop Color="CadetBlue"/>
+            <GradientStop Color="DarkOliveGreen" Offset="0.5"/>
+            <GradientStop Color="LavenderBlush" Offset="1"/>
+         </LinearGradientBrush>
+      </Grid.Background>
+      <StackPanel HorizontalAlignment="Left" Margin="3" VerticalAlignment="Top">
+         <Canvas Background="#FFFF8D2F" Height="28" >
+            <Menu Background="#FFFF8D2F" Height="28" Width="72" FontWeight="Bold" FontSize="16">
+               <MenuItem Header="Menu" >
+                  <MenuItem Header="New game" FontWeight="Medium" FontSize="14">
+                     <MenuItem Header="Tiny(3x3)" FontWeight="Medium" Click="TinyGame_Click"></MenuItem>
+                     <MenuItem Header="Classic(4x4)" FontWeight="Medium" Click="MediumGame_Click"></MenuItem>
+                     <MenuItem Header="Big(5x5)" FontWeight="Medium" Click="BigGame_Click"></MenuItem>
+                  </MenuItem>
+                  <MenuItem Header="Reset highscore" FontWeight="Medium" FontSize="14" Click="ResetHighScore_Click"></MenuItem>
+                  <MenuItem Header="About" FontWeight="Medium" FontSize="14" Click="About_Click"></MenuItem>
+                  <MenuItem Header="Exit" FontWeight="Medium" FontSize="14" Click="Exit_Click"></MenuItem>
+               </MenuItem>
+            </Menu>
+            <Button Background="Orange" FontWeight="Bold" BorderThickness="1" Canvas.Left="70" Click="BtnBack_Click">
+               <Image Source="back.png" Width="24" Height="24" ToolTip="Back">
+               </Image>
+            </Button>
+            <Button Background="Orange" FontWeight="Bold" BorderThickness="1" Canvas.Left="100" Click="BtnRestart_Click">
+               <Image Source="refresh.png" Width="24" Height="24" ToolTip="Restart"></Image>
+            </Button>
+         </Canvas>
+         <local:BorderGrid  Height="210" Width="210" x:Name="_mainGrid">
+            <Grid.ColumnDefinitions>
+               <ColumnDefinition Width="70"/>
+               <ColumnDefinition Width="70"/>
+               <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+               <RowDefinition Height="70"/>
+               <RowDefinition Height="70"/>
+               <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
+            <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
+            <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
+            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
+            <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
+            <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
+            <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
+            <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
+            <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center" FontWeight="Bold" FontSize="24" Content=""/>
+         </local:BorderGrid>
+         <StackPanel Background="#FFFF8D2F" Height="42">
+            <DockPanel HorizontalAlignment="Left" Margin="-3 -5 0 -3">
+               <Label Content="Score:" FontWeight="Bold"/>
+               <Label Name="lblScore" Content="0" MaxWidth="150" FontWeight="Bold"/>
+            </DockPanel>
+            <DockPanel HorizontalAlignment="Left" Margin="-3">
+               <Label Content="Highscore:" FontWeight="Bold"/>
+               <Label Name="lblHighScore" Content="0" MaxWidth="150" FontWeight="Bold"/>
+            </DockPanel>
+         </StackPanel>
+      </StackPanel>
 
-    </Grid>
+   </Grid>
 </Window>
